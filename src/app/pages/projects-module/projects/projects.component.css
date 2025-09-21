@@ -1,0 +1,21 @@
+.subnav {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+.subnav a {
+  text-decoration: none;
+  color: #444;
+  padding: 6px 10px;
+  border-radius: 6px;
+  border: 1px solid #e0e0e0;
+}
+.subnav a.active {
+  background: #f3f3f3;
+  font-weight: 600;
+}
+.project-content {
+  border: 1px dashed #ddd;
+  padding: 16px;
+  border-radius: 8px;
+}

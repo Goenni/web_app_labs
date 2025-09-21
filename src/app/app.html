@@ -1,0 +1,34 @@
+<header class="site-header">
+  <nav class="nav sidebar">
+    <div class="profile">
+      <img src="profile.jpg" alt="Profilbild" class="avatar" />
+      <h2 class="name">Benjamin Kirchhof</h2>
+    </div>
+    <div class="links">
+      <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Home</a>
+
+      <!-- Dropdown: Projekte -->
+      <details class="dropdown" [attr.open]="false">
+        <summary class="dropdown-toggle">
+          Projekte
+          <span class="chevron" aria-hidden="true">▾</span>
+        </summary>
+        <div class="dropdown-menu">
+          <a routerLink="/projects/bmw" routerLinkActive="active">BMW</a>
+          <a routerLink="/projects/dreicon" routerLinkActive="active">Dreicon</a>
+          <a routerLink="/projects/icsunonove" routerLinkActive="active">Icsunonove</a>
+        </div>
+      </details>
+
+      <a routerLink="/contact" routerLinkActive="active">Kontakt</a>
+    </div>
+  </nav>
+</header>
+
+<main class="content with-sidebar">
+  <router-outlet></router-outlet>
+</main>
+
+<footer class="site-footer with-sidebar">
+  © {{year}} – Dein Name
+</footer>

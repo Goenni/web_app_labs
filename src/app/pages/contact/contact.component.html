@@ -1,0 +1,9 @@
+<section>
+  <h1>Kontakt</h1>
+  <ul>
+    <li *ngFor="let c of contacts">
+      <strong>{{ c.label }}:</strong>
+      <a [href]="c.href" target="_blank" rel="noopener">{{ c.value }}</a>
+    </li>
+  </ul>
+</section>

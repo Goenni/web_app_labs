@@ -1,0 +1,188 @@
+/* Grundlayout */
+:host {
+  display: block;
+  min-height: 100vh;
+}
+
+/* Größere Sidebar */
+.nav.sidebar {
+  position: fixed;
+  inset: 0 auto 0 0;
+  width: 300px;                 /* größer */
+  height: 100vh;
+  padding: 28px 18px;           /* mehr Innenabstand */
+  box-sizing: border-box;
+  background: #0f172a;          /* etwas dunkler */
+  color: #e5e7eb;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  font-size: 18px;              /* größere Grundschrift */
+  line-height: 1.4;
+}
+
+/* Profil größer */
+.profile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  text-align: center;
+}
+.avatar {
+  width: 132px;
+  height: 132px;
+  border-radius: 9999px;
+  object-fit: cover;
+  border: 2px solid #334155;
+}
+.name {
+  margin: 0;
+  font-size: 1.25rem;           /* ~20px */
+  font-weight: 700;
+  color: #f8fafc;
+}
+
+/* Links größer */
+.links {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.links > a,
+.dropdown-toggle {
+  color: #e2e8f0;
+  text-decoration: none;
+  padding: 12px 14px;           /* größer */
+  border-radius: 10px;
+  transition: background 0.2s, color 0.2s;
+  font-size: 1.05rem;           /* ~16.8px */
+}
+.links > a:hover,
+.dropdown:hover .dropdown-toggle { background: #1e293b; color: #ffffff; }
+.links > a.active { background: #2563eb; color: #ffffff; }
+
+/* Dropdown */
+.dropdown { display: block; color: #e2e8f0; }
+.dropdown-toggle {
+  list-style: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  user-select: none;
+}
+.dropdown-toggle::-webkit-details-marker { display: none; }
+.dropdown[open] .chevron { transform: rotate(180deg); }
+.chevron { transition: transform 0.2s ease; }
+.dropdown-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 8px;
+  padding: 8px;
+  border-left: 2px solid #334155;
+  margin-left: 10px;
+}
+.dropdown-menu a {
+  color: #e2e8f0;
+  text-decoration: none;
+  padding: 10px 12px;
+  border-radius: 8px;
+  transition: background 0.2s, color 0.2s;
+  font-size: 1rem;
+}
+.dropdown-menu a:hover { background: #1e293b; color: #ffffff; }
+.dropdown-menu a.active { background: #2563eb; color: #ffffff; }
+
+/* Content und Footer Abstand zur größeren Sidebar */
+.content.with-sidebar {
+  margin-left: 300px;           /* an Sidebarbreite anpassen */
+  padding: 28px;
+  box-sizing: border-box;
+}
+.site-footer.with-sidebar {
+  margin-left: 300px;
+  padding: 18px 28px;
+  color: #94a3b8;
+  border-top: 1px solid #e2e8f0;
+  background: #ffffff;
+}
+
+/* Burger Button (mobil) */
+.burger {
+  display: none;                /* standard: versteckt (nur mobil sichtbar) */
+  background: transparent;
+  border: none;
+  padding: 8px;
+  border-radius: 8px;
+  cursor: pointer;
+  align-self: flex-end;
+}
+.burger:hover { background: #1e293b; }
+.burger-bar {
+  display: block;
+  width: 28px;
+  height: 3px;
+  background: #e5e7eb;
+  margin: 5px 0;
+  border-radius: 2px;
+}
+
+/* Responsiv: Zwischenstufe */
+@media (max-width: 1024px) {
+  .nav.sidebar { width: 260px; font-size: 17px; }
+  .content.with-sidebar, .site-footer.with-sidebar { margin-left: 260px; }
+  .avatar { width: 110px; height: 110px; }
+}
+
+/* Mobil: Sidebar bleibt links, wird aber per Burger ein-/ausklappbar */
+@media (max-width: 768px) {
+  .nav.sidebar {
+    width: 88vw;                    /* nimmt Großteil der Breite ein */
+    max-width: 360px;
+    height: auto;                   /* Höhe automatisch */
+    min-height: unset;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: auto;
+    padding-bottom: 12px;
+    border-right: 1px solid #1e293b;
+  }
+
+  /* Burger sichtbar */
+  .burger { display: block; }
+
+  /* Links standardmäßig verstecken, per .open zeigen */
+  .links {
+    display: none;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 6px;
+  }
+  .links.open { display: flex; }
+
+  /* Profil kompakter */
+  .profile {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+  .avatar { width: 56px; height: 56px; }
+  .name { font-size: 1.1rem; }
+
+  /* Content unter die fixe Leiste schieben */
+  .content.with-sidebar,
+  .site-footer.with-sidebar {
+    margin-left: 0;
+    padding-top: 120px; /* Platz für fixe Navbar */
+  }
+}
+
+/* Sehr klein */
+@media (max-width: 400px) {
+  .name { display: none; }
+  .avatar { width: 48px; height: 48px; }
+}
