@@ -1,0 +1,158 @@
+:host {
+  display: block;
+  --ink: #0f172a;         /* sehr dunkles Blau für Text */
+  --muted: #334155;       /* Sekundärtext */
+  --blue: #2563eb;        /* Primärblau */
+  --blue-2: #60a5fa;      /* Hellblau */
+  --panel: #0b1220;       /* dunkler Kontrast-Hintergrund */
+  --panel-alpha: rgba(11,18,32,0.82);
+  --line: rgba(255,255,255,0.12);
+  --shadow: 0 18px 40px rgba(2,6,23,0.25);
+
+  min-height: 100dvh;
+  display: grid;
+  place-items: center;
+  padding: clamp(1rem, 3vw, 2rem);
+  box-sizing: border-box;
+}
+
+/* Container für Hintergrundbild */
+.home {
+  position: relative;
+  width: min(980px, 92vw);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  isolation: isolate;
+}
+
+/* Der weiße Hintergrund (eigentlich die bunte Bildfläche) soll die volle Boxgröße definieren */
+.home.hero {
+  position: relative;
+  width: min(1100px, 94vw);
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  isolation: isolate;
+  min-height: clamp(340px, 48vh, 560px);
+}
+
+/* Bild füllt exakt die Box */
+.bg-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+  pointer-events: none;
+  filter: brightness(.9) saturate(1.05);
+}
+
+/* Bild als „Hintergrund“ über die Klasse .bg-img */
+.bg-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;         /* wie background-size: cover */
+  filter: brightness(.85) saturate(1.1);
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* Farbverlauf-Overlay für bessere Lesbarkeit */
+.home.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(120% 60% at 15% 20%, rgba(2,6,23,0.35), transparent 60%),
+    linear-gradient(180deg, rgba(2,6,23,0.25), rgba(2,6,23,0.45));
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* Text-Overlay bleibt in der Box, beeinflusst die Größe nicht */
+.overlay {
+  position: relative;
+  z-index: 1;
+  margin: clamp(.75rem, 2vw, 1.25rem);
+  padding: clamp(.9rem, 2.2vw, 1.4rem);
+  width: fit-content;
+  max-width: min(720px, 92%);
+  background: var(--panel-alpha);          /* dunkler Kontrast hinter dem Text */
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,0.06) inset,
+    var(--shadow);
+  color: #e5eefb;                           /* heller Text auf dunklem Panel */
+}
+
+/* Inhaltsebene über dem Bild – sicher sichtbar */
+.content {
+  position: relative;
+  z-index: 1;
+  backdrop-filter: blur(0px);
+  background: rgba(255,255,255,0.85);
+  border: 1px solid var(--line);
+  margin: .5rem;
+  border-radius: 14px;
+  padding: clamp(1.1rem, 3vw, 1.8rem);
+  display: grid;
+  gap: 1.1rem;
+}
+
+/* Typografie */
+.intro h1 {
+  margin: 0 0 .35rem 0;
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  line-height: 1.15;
+  color: #ffffff;
+}
+.intro .lead {
+  margin: 0;
+  color: #cbd5e1;
+}
+
+.pitch { display: grid; gap: .2rem; margin-top: .5rem; }
+.pitch .introline { margin: 0; font-weight: 700; color: #e2e8f0; }
+.pitch .detail { margin: 0; color: #cbd5e1; }
+
+.note { display: grid; gap: .2rem; margin-top: .4rem; }
+.note .cta-text { margin: 0; font-weight: 600; color: #e2e8f0; }
+.note .aside { margin: 0; color: #cbd5e1; font-style: italic; }
+
+/* Buttons */
+.cta { display: flex; gap: .6rem; flex-wrap: wrap; margin-top: .6rem; }
+.btn {
+  appearance: none;
+  border: 1px solid rgba(255,255,255,0.18);
+  background: rgba(255,255,255,0.08);
+  color: #f8fafc;
+  padding: .5rem .9rem;
+  border-radius: 10px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease, background .2s ease;
+  box-shadow: 0 2px 10px rgba(2,6,23,0.25);
+}
+.btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 20px rgba(2,6,23,0.35);
+  background: rgba(255,255,255,0.12);
+  border-color: rgba(255,255,255,0.28);
+}
+.btn.primary {
+  background: linear-gradient(180deg, var(--blue), var(--blue-2));
+  color: #ffffff;
+  border: 1px solid rgba(96,165,250,0.8);
+}
+.btn.primary:hover {
+  box-shadow:
+    0 0 0 1px rgba(96,165,250,0.35) inset,
+    0 10px 22px rgba(96,165,250,0.35);
+}

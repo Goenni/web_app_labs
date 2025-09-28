@@ -1,0 +1,132 @@
+:host {
+  display: block;
+
+  /* Light Blue + White Theme */
+  --bg: #f7fbff;
+  --panel: rgba(255,255,255,0.9);
+  --panel-strong: rgba(255,255,255,0.96);
+  --ink: #0c2236;
+  --muted: #3b5a72;
+  --line: rgba(15,42,66,0.14);
+  --blue: #5bb7ff;
+  --blue-2: #2a9dff;
+  --shadow: 0 18px 44px rgba(15,42,66,0.14);
+
+  color: var(--ink);
+  background:
+    radial-gradient(120% 100% at 50% -10%, rgba(90,183,255,0.18), rgba(90,183,255,0.06) 38%, transparent 60%),
+    var(--bg);
+  min-height: 100dvh;
+  padding: clamp(1rem, 2.4vw, 2rem);   /* vereinheitlicht */
+}
+
+/* Hero einheitlich */
+.dreicon.hero {
+  position: relative;
+  max-width: 1320px;                   /* vereinheitlicht */
+  margin: 0 auto;
+  min-height: clamp(60vh, 72vh, 82vh);
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  border: 1px solid var(--line);
+  display: grid;
+  place-items: end;
+}
+
+/* Hintergrund-Bildebene */
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+}
+.hero-bg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(1.03);
+  filter: contrast(1.06) saturate(1.04) brightness(.96);
+  transition: transform .8s ease, filter .8s ease;
+}
+.dreicon.hero::after {
+  /* leichte Abdunklung unten für Lesbarkeit */
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(247,251,255,0) 45%, rgba(15,42,66,0.22) 100%); pointer-events: none; }
+.dreicon.hero:hover .hero-bg img { transform: scale(1.06); filter: contrast(1.08) saturate(1.06) brightness(1); }
+
+/* Kompakte Glasbox bleibt */
+.hero-content.glass {
+  position: relative;
+  z-index: 1;
+  margin: clamp(.5rem, 1.4vw, 1rem);
+  padding: clamp(.6rem, 1.2vw, 1rem);
+  width: fit-content;
+  max-width: 52ch;
+  background: rgba(255,255,255,0.88);
+  border: 1px solid rgba(15,42,66,0.12);
+  border-radius: 10px;
+  box-shadow:
+    0 6px 22px rgba(15,42,66,0.12),
+    0 0 0 1px rgba(42,157,255,0.06) inset;
+}
+.hero-content.glass::after { content: ""; position: absolute;
+  inset: 4px;                         /* enger als zuvor */
+  z-index: -1;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border-radius: 8px;
+  background: transparent;
+  pointer-events: none;
+}
+
+/* Dezente Kopfakzentlinie, kürzer und schwächer */
+.hero-content.glass::before {
+  content: "";
+  position: absolute;
+  left: 10%; right: 10%; top: 4px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--blue) 40%, var(--blue-2) 60%, transparent);
+  opacity: .38;
+  pointer-events: none;
+}
+
+/* Typografie kompakter halten, damit die Box klein bleibt */
+.hero-content.glass .title,
+.hero-content.glass p {
+  max-width: 52ch;                    /* an Boxbreite gekoppelt */
+}
+
+.title {
+  margin: 0 0 .3rem 0;
+  font-size: clamp(1.5rem, 2.8vw, 2.2rem);
+  font-weight: 900;
+}
+
+.brand {
+  width: clamp(96px, 20%, 168px);     /* Logo kleiner, damit die Box nicht wächst */
+  margin: .1rem 0 .3rem;
+}
+
+.hero-content p {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.65;                  /* etwas enger */
+  font-size: clamp(.98rem, 1vw, 1.05rem);
+}
+
+/* Mobile: weiterhin kompakt, aber volle Breite wenn nötig */
+@media (max-width: 959px) {
+  .hero-content.glass {
+    max-width: calc(100% - 1rem);
+    margin: .5rem;
+    border-radius: 8px;
+    padding: clamp(.65rem, 3.2vw, .9rem);
+  }
+  .hero-content.glass::after {
+    inset: 3px;
+    border-radius: 6px;
+  }
+}

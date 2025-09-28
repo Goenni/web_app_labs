@@ -1,0 +1,100 @@
+:host {
+  display: block;
+  --bg: #0b1116;
+  --ink: #e6eef6;
+  --muted: #a7b6c6;
+  --panel: rgba(13,18,24,0.88);
+  --panel-2: rgba(16,22,29,0.9);
+  --bezel: rgba(195,210,230,0.1);
+  --bmw: #62a0ff;
+  --bmw-2: #1e73ff;
+  --shadow: 0 18px 50px rgba(0,0,0,0.55);
+
+  color: var(--ink);
+  background: radial-gradient(120% 100% at 50% -10%, rgba(30,115,255,0.10), transparent 60%), var(--bg);
+  min-height: 100dvh;
+  padding: clamp(1rem, 2.4vw, 2rem); /* vereinheitlicht */
+}
+
+/* Grundlayout */
+.logo-bg { position: relative; min-height: 100dvh; }
+.shell {
+  position: relative;
+  max-width: 1320px;                 /* vereinheitlicht */
+  margin: 0 auto;
+  padding: 0;                         /* Innenabstand über Host geregelt */
+  display: grid;
+  gap: clamp(1rem, 2.2vw, 2rem);
+}
+
+/* Hero – einheitliche Mindesthöhe */
+.hero {
+  position: relative;
+  display: grid;
+  gap: clamp(1rem, 2vw, 1.5rem);
+  grid-template-columns: 1fr;
+  min-height: clamp(60vh, 72vh, 82vh); /* vereinheitlicht */
+}
+@media (min-width: 980px) {
+  .hero { grid-template-columns: 1.1fr 1.05fr; align-items: stretch; }
+}
+
+/* Medienfelder – einheitliche Radien/Rahmen */
+.hero-media {
+  margin: 0;
+  background: #0f1620;
+  border: 1px solid var(--bezel);
+  border-radius: 18px;               /* vereinheitlicht */
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  position: relative;
+  display: grid;
+  place-items: center;
+}
+.hero-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(1.01);
+  filter: contrast(1.05) saturate(1.04) brightness(.98);
+  transition: transform .8s ease, filter .8s ease;
+}
+.hero-media.primary::after,
+.hero-media.secondary::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(11,17,23,0) 35%, rgba(11,17,23,0.85) 100%);
+  pointer-events: none;
+}
+.hero:hover .hero-media img { transform: scale(1.035); filter: contrast(1.08) saturate(1.06) brightness(1); }
+
+/* Zweites Hero (Logo) konsistent hoch */
+.hero-media.secondary.filled {
+  min-height: auto;                  /* Höhe kommt jetzt aus .hero */
+}
+.hero-media.secondary.filled img {
+  object-fit: contain;
+  padding: clamp(1rem, 3vw, 2.25rem);
+  background: linear-gradient(180deg, rgba(15,22,32,0.65), rgba(15,22,32,0.85));
+  filter: grayscale(6%) saturate(100%) contrast(118%);
+  transform: none;
+}
+
+/* Textpanel */
+.hero-text {
+  background: linear-gradient(180deg, rgba(13,18,24,0.55), var(--panel));
+  border: 1px solid var(--bezel);
+  border-radius: 18px;               /* vereinheitlicht */
+  padding: clamp(1rem, 2.2vw, 1.8rem);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(6px);
+  display: grid;
+  gap: .55rem;
+  margin-top: .25rem;
+}
+@media (min-width: 980px) {
+  .hero-text { grid-column: 1 / -1; justify-self: center; width: min(960px, 86%); margin-top: -8vh; }
+}
+.title { margin: 0 0 .25rem 0; font-size: clamp(1.6rem, 3.1vw, 2.6rem); font-weight: 900; letter-spacing: .3px; color: var(--ink); text-shadow: 0 2px 14px rgba(0,0,0,0.5); }
+.hero-text p { margin: 0; color: var(--muted); line-height: 1.75; }

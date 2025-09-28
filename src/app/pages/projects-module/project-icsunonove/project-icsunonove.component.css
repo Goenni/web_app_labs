@@ -1,22 +1,21 @@
 :host {
   display: block;
-  /* Vollflächiger schwarzer Hintergrund für die X1/9-Seite */
+  /* Black + Yellow Akzente */
   --bg: #000000;
-  --vinyl: rgba(20,24,28,0.85);
-  --bezel: rgba(255,255,255,0.08);
-  --text: #e7f6ff;
-  --muted: #a7c2cf;
-  --amber: #ffb000;
-  --aqua: #48f3ff;
+  --panel: rgba(12,12,12,0.9);
+  --bezel: rgba(255,255,255,0.06);
+  --text: #f2f2f2;
+  --muted: #b9b9b9;
+  --yellow: #ffd300;           /* Hauptakzent */
+  --yellow-warm: #ffb800;      /* warmer Verlaufston */
   --shadow: 0 14px 40px rgba(0,0,0,0.55);
 
-  /* Entfernt dekorative Verläufe, setzt reines Schwarz */
   background: var(--bg);
   padding: clamp(1rem, 2vw, 2rem);
   color: var(--text);
 }
 
-/* Optional: Scanlines dezenter machen oder entfernen */
+/* dezente Scanlines */
 :host::before {
   content: "";
   position: fixed;
@@ -29,8 +28,8 @@
     transparent 3px,
     transparent 4px
   );
-  opacity: .25;       /* war .35 */
-  mix-blend-mode: normal; /* war soft-light; neutraler auf Schwarz */
+  opacity: .18;
+  mix-blend-mode: normal;
 }
 
 .container {
@@ -42,7 +41,7 @@
 
 /* Card Shells */
 .card {
-  background: var(--vinyl);
+  background: var(--panel);
   border: 1px solid var(--bezel);
   border-radius: 12px;
   box-shadow: var(--shadow);
@@ -50,19 +49,19 @@
   position: relative;
 }
 
-/* Top accent line im Bezel-Stil */
+/* Top accent line in Gelb-Verlauf */
 .card::before {
   content: "";
   position: absolute;
   left: 0; right: 0; top: 0;
-  height: 2px;
+  height: 3px;
   background:
-    linear-gradient(90deg, transparent, var(--aqua), var(--amber), transparent);
-  opacity: .35;
+    linear-gradient(90deg, transparent 0 8%, var(--yellow) 35%, var(--yellow-warm) 65%, transparent 92%);
+  opacity: .8;
   pointer-events: none;
 }
 
-/* Hero Bild mit sanftem Hover */
+/* Hero Bild */
 .header-image {
   position: relative;
   isolation: isolate;
@@ -72,23 +71,22 @@
   height: min(52vh, 520px);
   object-fit: cover;
   display: block;
-  filter: contrast(1.02) saturate(.98);
+  filter: contrast(1.02) saturate(1.02);
   transition: transform .7s ease, filter .7s ease;
 }
 .header-image::after {
   content: "";
   position: absolute;
   inset: 0;
-  background:
-    linear-gradient(to top, rgba(0,0,0,0.45), rgba(0,0,0,0));
+  background: linear-gradient(to top, rgba(0,0,0,0.55), rgba(0,0,0,0));
   pointer-events: none;
 }
 .header-image:hover img {
-  transform: scale(1.01);
-  filter: contrast(1.05) saturate(1.02);
+  transform: scale(1.015);
+  filter: contrast(1.06) saturate(1.05);
 }
 
-/* Content: Text | Clock */
+/* Content */
 .content {
   display: grid;
   gap: clamp(1rem, 2.5vw, 2rem);
@@ -102,14 +100,14 @@
   }
 }
 
-/* Typo mit leicht monospacedem/Segment-Charakter */
+/* Typo */
 .title {
   margin: .25rem 0 .75rem;
   font-size: clamp(1.2rem, 2.1vw, 1.6rem);
   font-weight: 800;
   letter-spacing: 1px;
-  color: var(--aqua);
-  text-shadow: 0 0 8px rgba(72,243,255,0.35);
+  color: var(--yellow);
+  text-shadow: 0 0 10px rgba(255,211,0,0.4);
 }
 .lead {
   font-size: clamp(.98rem, 1.15vw, 1.08rem);
@@ -118,16 +116,18 @@
   margin: .4rem 0;
 }
 
-/* Retro Divider wie beleuchtete Rille */
+/* Divider in Gelb */
 .divider {
   height: 1px;
   margin: .85rem 0;
   background:
-    linear-gradient(90deg, transparent, rgba(72,243,255,0.45), rgba(255,176,0,0.45), transparent);
-  box-shadow: 0 0 6px rgba(72,243,255,0.35), 0 0 6px rgba(255,176,0,0.30) inset;
+    linear-gradient(90deg, transparent, rgba(255,211,0,0.7), rgba(255,184,0,0.6), transparent);
+  box-shadow:
+    0 0 6px rgba(255,211,0,0.45),
+    0 0 6px rgba(255,184,0,0.35) inset;
 }
 
-/* Feature-Badges im 80s-Chip/Segment-Stil */
+/* Feature-Badges */
 .badges {
   display: flex;
   flex-wrap: wrap;
@@ -139,16 +139,16 @@
   letter-spacing: .6px;
   color: var(--text);
   background:
-    linear-gradient(180deg, rgba(72,243,255,0.12), rgba(255,176,0,0.10));
-  border: 1px dashed rgba(255,255,255,0.22);
+    linear-gradient(180deg, rgba(255,211,0,0.12), rgba(255,184,0,0.10));
+  border: 1px dashed rgba(255,255,255,0.18);
   padding: .3rem .6rem;
   border-radius: 6px;
   box-shadow:
-    0 0 0 1px rgba(255,255,255,0.06) inset,
+    0 0 0 1px rgba(255,255,255,0.05) inset,
     0 6px 16px rgba(0,0,0,0.35);
 }
 
-/* Clock Card mit Segment-Rand & Glow */
+/* Clock Card */
 .clock-card {
   display: grid;
   gap: .55rem;
@@ -158,18 +158,18 @@
   border-radius: 10px;
   overflow: hidden;
   aspect-ratio: 4/3;
-  background: #0b1016;
+  background: #0b0b0b;
   box-shadow:
-    0 0 0 1px rgba(72,243,255,0.25),
+    0 0 0 1px rgba(255,211,0,0.35),
     0 10px 24px rgba(0,0,0,0.6),
-    0 0 24px rgba(72,243,255,0.18) inset;
+    0 0 24px rgba(255,211,0,0.2) inset;
 }
 .clock-media img.clock {
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
-  filter: saturate(1.0);
+  filter: saturate(1.02);
   transition: transform .5s ease, filter .5s ease;
 }
 .clock-media::after {
@@ -178,7 +178,7 @@
   inset: 0;
   pointer-events: none;
   background:
-    linear-gradient(180deg, rgba(72,243,255,0.12), transparent 35%, transparent 65%, rgba(255,176,0,0.10));
+    linear-gradient(180deg, rgba(255,211,0,0.14), transparent 35%, transparent 65%, rgba(255,184,0,0.12));
   mix-blend-mode: screen;
 }
 .clock-media:hover img.clock {
@@ -192,15 +192,15 @@
   text-shadow: 0 0 6px rgba(0,0,0,0.5);
 }
 
-/* Kleine Pixelkörnung für Authentizität */
+/* Korn/Noise */
 .card::after {
   content: "";
   position: absolute;
   inset: 0;
   pointer-events: none;
-  opacity: .15;
+  opacity: .14;
   background-image:
-    radial-gradient(circle at 1px 1px, rgba(255,255,255,0.04) 1px, transparent 1px);
+    radial-gradient(circle at 1px 1px, rgba(255,255,255,0.035) 1px, transparent 1px);
   background-size: 3px 3px;
   mix-blend-mode: soft-light;
 }

@@ -1,10 +1,22 @@
-<section>
-  <h1>Hallo, ich bin Dein Name</h1>
-  <p>
-    Kurze Vorstellung über dich. Diese Seite dient als Startseite mit allgemeinen Informationen.
-  </p>
-  <p>
-    Du findest meine <a routerLink="/projects">Projekte</a> und wie du mich
-    <a routerLink="/contact">kontaktieren</a> kannst.
-  </p>
+<section class="home hero">
+  <!-- Hintergrundbild im Markup, per Klasse als Cover-Hintergrund genutzt -->
+  <img class="bg-img" src="colorful-background.webp" alt="" aria-hidden="true" />
+
+  <!-- Neuer Textbereich mit eigenem Kontrast-Hintergrund -->
+  <div class="overlay">
+    <header class="intro">
+      <h1>Hello There!</h1>
+      <p class="lead">Nice to see you here David. I hope the site is to your satisfaction.</p>
+    </header>
+
+    <section class="pitch">
+      <p class="introline">I have selected three different projects</p>
+      <p class="detail">to just briefly give you an insight into what I have done in the past.</p>
+    </section>
+
+    <section class="note">
+      <p class="cta-text">You can also find my contact information, just in case.</p>
+      <p class="aside">I would love to hear your thoughts on the whole thing, since just using AI to create the styling was honestly a real nightmare...</p>
+    </section>
+  </div>
 </section>
